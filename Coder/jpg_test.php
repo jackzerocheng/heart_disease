@@ -4,9 +4,10 @@
  * User: jzc
  * Date: 2018/5/3
  * Time: 下午11:14
+ * 折线图
  */
-require_once ("jpgraph/src/jpgraph.php");
-require_once ("jpgraph/src/jpgraph_line.php");
+require_once ("../Library/jpgraph/src/jpgraph.php");
+require_once ("../Library/jpgraph/src/jpgraph_line.php");
 
 $data1 = array(523,634,371,278,685,587,490,256,398,545,367,577); //第一条曲线的数组
 

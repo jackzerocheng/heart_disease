@@ -38,8 +38,8 @@ function setFile($fileName,$arr){
 	fclose($file);
 }
 echo 'start<br>';
-$arr = getFile('test.data');
+$arr = getFile('../Data/test.data');
 
-setFile('datainsert.sql',$arr);
+setFile('../Files/datainsert.sql',$arr);
 echo 'finish<br>';
 ?>
