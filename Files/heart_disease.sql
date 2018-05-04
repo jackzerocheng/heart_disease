@@ -1,4 +1,4 @@
-create table heart_disease (
+create table tbl_disease (
 id int(10) unsigned not null auto_increment commit 'id',
 age varchar(10) not null default 0,
 sex varchar(10) not null default 0,
