@@ -8,6 +8,9 @@
  */
 require_once ("../Library/jpgraph/src/jpgraph.php");
 require_once ("../Library/jpgraph/src/jpgraph_line.php");
+require_once ("../Library/jpgraph/src/jpgraph_bar.php");
+require_once ("../Library/jpgraph/src/jpgraph_pie.php");
+require_once ("../Library/jpgraph/src/jpgraph_pie3d.php");
 
 class PrintPage
 {
@@ -36,6 +39,7 @@ class PrintPage
 
     //绘制折线图
     public function printLinechart($arrData,$width,$height,$xTickLabel,$color = 'red'){
+        $this->imgMargin = [60,30,30,70];
         $graph = new Graph($width,$height);
         $graph->SetScale($this->scale);
         $graph->SetShadow();
@@ -65,8 +69,10 @@ class PrintPage
     }
 
     //绘制柱状图
-    public function printHistogram($arrData,$width,$height,$xTickLabel,$color = 'red'){
+    public function printHistogram($arrData,$width,$height,$xTickLabel,$color = 'blue'){
+        $this->imgMargin = [40,30,40,50];
         $graph = new Graph($width,$height);  //创建新的Graph对象
+
         $graph->SetScale($this->scale);  //刻度样式
         $graph->SetShadow();          //设置阴影
         $graph->img->SetMargin($this->imgMargin[0],$this->imgMargin[1],$this->imgMargin[2],$this->imgMargin[3]); //设置边距
@@ -112,13 +118,10 @@ class PrintPage
     }
 
     public function demo(){
-        $data1 = array(523,634,371,278,685,587,490,256,398,545,367,577,800);
+        $data1 = array(19,23,34,38,45,67,71,78,85,87,96,145);
         //$gDateLocale = new DateLocale();
-        $xTick = [1,2,3,4,5,6,7,8,10,11,12,'11111'];
+        $xTick = array(1,2,3,4,5,6,7,8,9,10,11,12);
         $a = new PrintPage();
-        $a->printLinechart($data1,500,400,$xTick);
+        $a->printPie($data1,500,400,$xTick);
     }
 }
-
-
-?>

@@ -1,10 +1,5 @@
 <?php
-//echo 'download starting';
-
-//   file_get_contents  太慢了！
-//$url='http://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/new.data';
-//$html = file_get_contents($url);
-//echo $html;
+//   下载文件脚本
 
 // 获取页面内容
 function getContent($url){
