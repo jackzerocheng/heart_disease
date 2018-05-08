@@ -17,8 +17,8 @@ class DataShow{
     function __construct()
     {
         $this->db = new DB();
-        $this->xValue = [0,0,0,0,0];
-        $this->yValue = [0,0,0,0,0];
+        $this->xValue = array();
+        $this->yValue = array();
     }
 
     //输出  折线图 or 柱形图 or 饼图
@@ -63,7 +63,8 @@ class DataShow{
 
     //将排序好的数组放入   得到X轴、Y轴的数据
     public function getKeyArr($arr){
-        $rs = array();
+        $rs = array(); //存  X轴数据
+        $tmp = array();// 存  Y轴数据
         $len = count($arr);
         if($arr[$len-1] > ($arr[0]+5))
         {
@@ -80,6 +81,7 @@ class DataShow{
             $this->xValue = $rs;    //  得到x轴数据
 
             $count = 0;
+            $this->xValue = [0,0,0,0,0];
             //   得到Y轴数据
             while($count < $len){
                 switch($arr[$count]){
@@ -94,7 +96,37 @@ class DataShow{
                 $count++;
             }
         }
+        else{
+            //   最大和最小相差不到5，将所有非重复值列入X轴
+            $rs[0] = $arr[0];
+            $tmp[0] = 1;
+            $count = 0;
+            for($i = 1;$i < $len;$i++){
+                if($rs[$count] != $arr[$i])
+                {
+                    $rs[] = $arr[$i];
+                    $tmp[] = 1;
+                    $count++;
+                }
+                else{
+                    $tmp[$count] += 1;
+                }
+            }
 
+            $this->xValue = $rs;
+            $this->yValue = $tmp;
+        }
+
+    }
+
+    // for test
+    public function getxValue(){
+        return $this->xValue;
+    }
+
+    //  for test
+    public function getyValue(){
+        return $this->yValue;
     }
 
     public function demo(){
