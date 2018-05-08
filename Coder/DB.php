@@ -8,23 +8,38 @@
 class DB{
     private $conn;
     private $secureKey = 1;
+    private $tableName;
 
     function __construct()
     {
         $this->conn = mysqli_connect('localhost','root','root','heart_disease') or die('cannot connect to mysql');
+        $this->tableName = 'tbl_disease';
     }
 
     public function DBclose(){
         $this->conn->close();
     }
 
+    //  返回所有数据
+    public function selectAll(){
+        $arr = array();
+        $sql = "select * from $this->tableName";
+        $rs = mysqli_query($this->conn,$sql);
+        while($row = mysqli_fetch_row($rs)){
+            $arr[] = $row;
+        }
+        return $arr;
+    }
     //查询某一列的值
     public function selectByKey($key){
         $arr =array();
-        $sql = "select $key from tbl_disease";
+        $sql = "select $key from $this->tableName";
         $result = mysqli_query($this->conn,$sql);
         while($row = mysqli_fetch_row($result)){
-            $arr[] = $row[0];
+            if($row[0] != -1)
+            {
+                $arr[] = $row[0];
+            }
         }
 
         return $arr;
@@ -32,7 +47,7 @@ class DB{
 
     //返回记录总数
     public function printCount(){
-        $sql = 'select count(*) from tbl_disease';
+        $sql = "select count(*) from $this->tableName";
         $result = mysqli_query($this->conn,$sql);
         $row = mysqli_fetch_array($result);
         return $row[0];
@@ -40,16 +55,24 @@ class DB{
 
     //插入数据，仅内部调用
     public function dataInsert($sql,$secureKey){
-        $rt = false;
+        $rt = true;
         if($this->secureKey !== $secureKey)
             return;
-        $result = mysqli_query($this->conn,$sql);
-        if($result)
+        foreach ($sql as $key=>$value)
         {
-            if(mysqli_affected_rows($this->conn) > 0){
-                $rt = true;
+            $value = trim($value);
+            if($value !=null && $value != '')
+            {
+                $value = $value . ';';
+                $result = mysqli_query($this->conn,$value);
+                if(!$result)
+                {
+                    echo $value.'<br>';
+                    $rt = false;
+                }
             }
         }
+
 
         return $rt;
     }
