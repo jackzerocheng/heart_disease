@@ -30,7 +30,9 @@ class DB{
         }
         return $arr;
     }
+
     //查询某一列的值
+    //  过滤所有的  -1  的值！！！
     public function selectByKey($key){
         $arr =array();
         $sql = "select $key from $this->tableName";

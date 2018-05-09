@@ -33,10 +33,12 @@ class DataShow{
 
         //初始化  画图函数
         $printpage = new PrintPage();
+        $width = 500;
+        $height = 300;
         switch($type){
-            case 1:$printpage->printLinechart($this->yValue,500,300,$this->xValue);break;
-            case 2:$printpage->printHistogram($this->yValue,500,300,$this->xValue);break;
-            case 3:$printpage->printPie($this->yValue,500,300,$this->xValue);break;
+            case 1:$printpage->printLinechart($this->yValue,$width,$height,$this->xValue);break;
+            case 2:$printpage->printHistogram($this->yValue,$width,$height,$this->xValue);break;
+            case 3:$printpage->printPie($this->yValue,$width,$height,$this->xValue);break;
             default:
                 echo '<h5>error!</h5>';break;
         }
@@ -81,7 +83,7 @@ class DataShow{
             $this->xValue = $rs;    //  得到x轴数据
 
             $count = 0;
-            $this->xValue = [0,0,0,0,0];
+            $this->yValue = [0,0,0,0,0];
             //   得到Y轴数据
             while($count < $len){
                 switch($arr[$count]){
@@ -131,8 +133,6 @@ class DataShow{
 
     public function demo(){
         $test = new DataShow();
-        $test->main('id');
+        $test->main('id',1);
     }
 }
-
-

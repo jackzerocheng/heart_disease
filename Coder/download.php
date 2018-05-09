@@ -27,7 +27,14 @@ function produceFile($content,$fileName = 'download.txt'){
 echo "<a href='javascript:window.history.go(-1);'>返回上一页</a><br>";
 $url = 'http://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data';
 $content = getContent($url);
+if($content == null || $content == '')
+{
+    echo '下载失败，请检查网络或者数据源后重试<br>';
+}
+else
+{
+    echo '下载数据内容为(文件在Data目录下)<br>'.$content;
+    produceFile($content);
+}
 
-echo '下载数据内容为(文件在Data目录下)<br>'.$content;
-produceFile($content);
 ?>
