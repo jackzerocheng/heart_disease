@@ -4,6 +4,7 @@
  * User: jzc
  * Date: 2018/5/7
  * Time: 下午1:36
+ * 数据库操作文件
  */
 class DB{
     private $conn;
@@ -33,9 +34,18 @@ class DB{
 
     //查询某一列的值
     //  过滤所有的  -1  的值！！！
-    public function selectByKey($key){
+    //    $isDisease: 是否患病
+    public function selectByKey($key,$isDisease){
         $arr =array();
-        $sql = "select $key from $this->tableName";
+        if($isDisease)
+        {
+            $sql = "select $key from $this->tableName where status>0";
+        }
+        else
+        {
+            $sql = "select $key from $this->tableName where status=0";
+        }
+
         $result = mysqli_query($this->conn,$sql);
         while($row = mysqli_fetch_row($result)){
             if($row[0] != -1)
@@ -45,6 +55,21 @@ class DB{
         }
 
         return $arr;
+    }
+
+    public function getCountDisease($isDisease)
+    {
+        if($isDisease)
+        {
+            $sql = "select count(*) from $this->tableName where status>0";
+        }
+        else
+        {
+            $sql = "select count(*) from $this->tableName where status=0";
+        }
+        $result = mysqli_query($this->conn,$sql);
+        $row = mysqli_fetch_array($result);
+        return $row[0];
     }
 
     //返回记录总数
@@ -77,6 +102,44 @@ class DB{
 
 
         return $rt;
+    }
+
+    //  获取特征值中最大的数据
+    public function getMax($key)
+    {
+        $sql = "Select max($key) from $this->tableName";
+        $result = mysqli_query($this->conn,$sql);
+        $row = mysqli_fetch_array($result);
+        return $row[0];
+    }
+
+    //    获取特征值中最小的数据
+    public function getMin($key)
+    {
+        $sql = "Select min($key) from $this->tableName where $key <> -1";
+        $result = mysqli_query($this->conn,$sql);
+        $row = mysqli_fetch_array($result);
+        return $row[0];
+    }
+
+    //  获取特征值中最大的数据
+    //  测试数据
+    public function getTestMax($key, $table = 'tbl_disease_test')
+    {
+        $sql = "Select max($key) from $table";
+        $result = mysqli_query($this->conn,$sql);
+        $row = mysqli_fetch_array($result);
+        return $row[0];
+    }
+
+    //    获取特征值中最小的数据
+    //    测试数据
+    public function getTestMin($key, $table = 'tbl_disease_test')
+    {
+        $sql = "Select min($key) from $table where $key <> -1";
+        $result = mysqli_query($this->conn,$sql);
+        $row = mysqli_fetch_array($result);
+        return $row[0];
     }
 
 }

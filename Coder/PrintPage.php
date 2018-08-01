@@ -5,6 +5,7 @@
  * User: jzc
  * Date: 2018/5/6
  * Time: 下午6:57
+ * 基础画图文件
  */
 require_once ("../Library/jpgraph/src/jpgraph.php");
 require_once ("../Library/jpgraph/src/jpgraph_line.php");
@@ -29,12 +30,12 @@ class PrintPage
     function __construct(){
          $this->width = 500;
          $this->height = 300;
-         $this->title = '数值与数据分布图';
+         $this->title = '';
          $this->scale = 'textlin';
          $this->imgMargin = [60,30,30,70];
          $this->valueColor = 'red';
-         $this->xtitle = '数值';
-         $this->ytitle = '数量';
+         $this->xtitle = '归一化范围';
+         $this->ytitle = '计数';
     }
 
     //绘制折线图

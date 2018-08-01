@@ -23,10 +23,14 @@ $run = new runData();
 //   1：生成SQL  2：导入SQL  3：数据查看
 switch($type){
     case 1:
-        $arr = $run->getFile('download.txt');
-        if(sizeof($arr) > 1){
+        $train_arr = $run->getFile('train_data.txt', ',');
+        $test_arr = $run->getFile('test_data.txt' , ',');
+        if(sizeof($train_arr) > 1 && sizeof($test_arr) > 1 ){
+            echo '数组大小'.sizeof($train_arr).'<br>';
             echo 'SQL文件已经生成！Data/datainsert.sql<br>';
-            $run->setFile('datainsert.sql',$arr);
+            //$randInt = mt_rand(1,10);
+            $run->setFile('datainsert.sql',$train_arr,'tbl_disease');
+            $run->setFile('testdatainsert.sql',$test_arr,'tbl_disease_test');
         }
         else
         {
@@ -35,9 +39,13 @@ switch($type){
         break;
     case 2:
         if($run->execSql('datainsert.sql'))
-            echo '执行成功!';
+            echo '训练数据插入成功!';
         else
-            echo '执行失败!';
+            echo '训练数据插入失败!';
+        if($run->execSql('testdatainsert.sql'))
+            echo '测试数据插入成功!';
+        else
+            echo '测试数据插入失败!';
         break;
     case 3:
         echo "<a href='http://localhost:8888/phpmyadmin/'>数据管理</a><br>";

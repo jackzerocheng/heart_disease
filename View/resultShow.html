@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>结果展示</title>
+    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">  <!-- Google web font "Open Sans" -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="css/demo.css" />
+    <link rel="stylesheet" href="css/templatemo-style.css">
+
+    <script type="text/javascript" src="js/modernizr.custom.86080.js"></script>
+
+</head>
+
+<body>
+
+<div id="particles-js"></div>
+
+<ul class="cb-slideshow">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+
+<div class="container-fluid">
+    <div class="row cb-slideshow-text-container ">
+        <div class= "tm-content col-xl-6 col-sm-8 col-xs-8 ml-auto section" style="margin: auto">
+            <div>
+                <header class="mb-5" style="margin: auto"><h1 style="color: #fdfffd;">结果展示 </h1><button type="button" class="tm-btn-subscribe" onclick="javascript:window.location.href='./index.html'">首页</button></header>
+                <form action="#" method="get" class="subscribe-form">
+                    <div class="row form-section">
+
+                        <div class="col-md-7 col-sm-7 col-xs-7">
+
+                        </div>
+
+                    </div>
+                </form>
+                <p>预测结果</p>
+                <div>
+                    <p>Logistic函数</p>
+                    <img src="img/result.png" style="width: 600px;height: 300px">
+                </div>
+                <div>
+                    <p style="color:red">批处理梯度上升</p>
+                    <p>每次循环读入全部数据，循环n次求权重</p>
+                </div>
+                <div>
+                    <p style="color:red">随机梯度上升</p>
+                    <p>每次循环取一个样本点，依次取所有样本点</p>
+                </div>
+                <div>
+                    <p style="color:red">改进的随机梯度上升</p>
+                    <p>每次循环随机取样本点，循环n次随机取n个点</p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+</body>
+
+<script type="text/javascript" src="js/particles.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+</html>
